@@ -68,16 +68,14 @@ public class Main {
         /*
             Lemos os padrões
         */
-        while(quantidadePadroes-- >= 0) {
-            int i = 0;
-            char[] operadores;
+        scanner.nextLine();
+        for(int j = 0; j < quantidadePadroes; j++) {
             
-            entrada = scanner.nextLine();            
-            operadores = entrada.toCharArray();
+            entrada = scanner.nextLine();
             
-            padroes[i++] = new LinhaCombinacao(operadores);
+            padroes[j] = new LinhaCombinacao(entrada.toCharArray());
         }
-        
+                
         return new CasoTeste(quadro, padroes);
     }
 
