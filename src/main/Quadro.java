@@ -3,22 +3,24 @@ package main;
 public class Quadro {
 
     private LinhaNumeros[] linhas;
-    private int quantidadeLinhas, quantidadeColunas, proximo;
+    private int proximo, quantidadeLinhas;
     
-    public Quadro(int quantidadeLinhas, int quantidadeColunas) {
+    public Quadro(int quantidadeLinhas) {
         this.quantidadeLinhas = quantidadeLinhas;
-        this.quantidadeColunas = quantidadeColunas;
-        this.proximo = 0;
-        this.linhas = new LinhaNumeros[quantidadeLinhas];
+    	this.proximo = 0;
+        this.linhas = new LinhaNumeros[quantidadeLinhas+1];
     }
 
     public void addLinha(LinhaNumeros linha) {
-        if(quantidadeLinhas != proximo && linha.length() == quantidadeColunas)
-            linhas[proximo++] = linha;
+        linhas[proximo++] = linha;
     }
     
     public LinhaNumeros getLinha(int i) {
         return this.linhas[i];
+    }
+    
+    public int last() {
+    	return quantidadeLinhas-1;
     }
     
     public String toString() {

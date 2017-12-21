@@ -6,27 +6,46 @@ public class CasoTeste {
     private LinhaCombinacao[] padroes;
     
     public CasoTeste(Quadro quadro, LinhaCombinacao[] padroes) {
-        this.quadro = quadro;
+        this.quadro = adicionaLinhaAuxiliar(quadro);
         this.padroes = padroes;
     }
     
-    public int getMelhorValor() {
-        return getMelhorValor(0);
+    private Quadro adicionaLinhaAuxiliar(Quadro quadro) {
+    	
+    	LinhaNumeros linhaAuxiliar;
+    	int[] numeros = new int[quadro.getLinha(0).length()];
+    	char[] combinacao = new char[quadro.getLinha(0).length()];
+    	
+    	for(int n : numeros) {
+    		n = 0;
+    	}    	
+    	for(char c : combinacao) {
+    		c = '.';    	
+    	}
+    	
+    	linhaAuxiliar = new LinhaNumeros(numeros);
+    	linhaAuxiliar.setCombinacao(new LinhaCombinacao(combinacao));
+    	
+    	quadro.addLinha(linhaAuxiliar);
+    	
+		return quadro;
+	}
+
+	public int getMelhorValor() {
+        return getMelhorValor(quadro.last());
     }
     
     public int getMelhorValor(int linhaQuadro) {
         
-        CasoTeste caso;
         int melhorValor = 0;
         
-        if(linhaQuadro < quadro.length())        
-            for (int i = 0; i < padroes.length; i++) {
-                if(linhaQuadro == 0 || !padroes[i].isConflitante(quadro.getLinha(linhaQuadro-1).getCombinacao())) {
-                    caso = new CasoTeste(quadro, padroes);
-                    melhorValor = Integer.max(melhorValor, quadro.getLinha(linhaQuadro).setCombinacao(padroes[i]) + caso.getMelhorValor(linhaQuadro+1));
-                }
-            }
-        
+        if(linhaQuadro >= 0)
+        	for(LinhaCombinacao padrao:padroes)
+        		if(!padrao.isConflitante(quadro.getLinha(linhaQuadro+1).getCombinacao())) {
+        			quadro.getLinha(linhaQuadro).setCombinacao(padrao);
+        			melhorValor = Integer.max(melhorValor, padrao.calcula(quadro.getLinha(linhaQuadro)) + this.getMelhorValor(linhaQuadro-1));
+        		}        			
+        System.out.println(quadro);
         return melhorValor;
     }
     

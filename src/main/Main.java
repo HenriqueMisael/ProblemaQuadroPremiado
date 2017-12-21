@@ -39,7 +39,7 @@ public class Main {
     public static CasoTeste geraCasoTeste(int quantidadeLinhas, int quantidadeColunas) {
         
         String entrada;
-        Quadro quadro = new Quadro(quantidadeLinhas,quantidadeColunas);
+        Quadro quadro = new Quadro(quantidadeLinhas);
         LinhaCombinacao[] padroes;
         int quantidadePadroes;
                 

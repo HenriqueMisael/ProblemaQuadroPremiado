@@ -19,7 +19,7 @@ public class LinhaCombinacao {
     public boolean isConflitante(LinhaCombinacao linha) {
         
         for(int i = 0; i < combinacao.length; i++) {
-            if(this.getOperador(i) == linha.getOperador(i))
+        	if(this.getOperador(i) != linha.getOperador(i))
                 return false;
         }
         return true;
@@ -34,14 +34,14 @@ public class LinhaCombinacao {
         return string + " ";
     }
 
-    public int calcula(int[] numeros) {
+    public int calcula(LinhaNumeros numeros) {
 
         int valor = 0;
         
-        for(int i = 0; i < numeros.length; i++)
+        for(int i = 0; i < numeros.length(); i++)
             switch(combinacao[i]) {
-            case '+': valor += numeros[i];break;
-            case '-': valor -= numeros[i];break;
+            case '+': valor += numeros.getNumero(i);break;
+            case '-': valor -= numeros.getNumero(i);break;
             default: valor += 0;
             }
             

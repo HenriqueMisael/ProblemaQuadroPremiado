@@ -10,12 +10,14 @@ public class LinhaNumeros {
         this.combinacao = null;
     }
     
-    public int setCombinacao( LinhaCombinacao combinacao ) {
+    public void setCombinacao( LinhaCombinacao combinacao ) {
         if( combinacao.length() == numeros.length ) {
             this.combinacao = combinacao;
-            return combinacao.calcula(numeros);
         }
-        return 0;
+    }
+    
+    public int getNumero(int i) {
+    	return numeros[i];
     }
     
     public LinhaCombinacao getCombinacao() {
@@ -30,8 +32,8 @@ public class LinhaNumeros {
         
         String string = "";
         
-        for(Integer i:numeros)
-            string += i.toString() + " ";
+        for(int i = 0; i < length(); i++)
+            string += String.format("(%d %c)", numeros[i], combinacao.getOperador(i));
         
         return string;
     }
